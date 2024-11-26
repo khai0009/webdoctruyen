@@ -11,7 +11,7 @@ export default function Page(){
   const toggleHome = () => {
     setShowHome(!showHome);
   };
-  if(showHome === true){
+  if(showHome){
     return (
       <Home></Home>
     )
