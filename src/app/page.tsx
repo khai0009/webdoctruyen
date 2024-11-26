@@ -1,6 +1,7 @@
 "use client"
 import { useState } from 'react';
 import Home from './home';
+import List from './List';
 import { BrowserRouter, Link,Route, Routes } from 'react-router-dom';
 
 
@@ -53,7 +54,7 @@ export default function Page(){
       </div>
     </div>
   </nav>
-      
+      <List></List>
     </>
   );
 }
