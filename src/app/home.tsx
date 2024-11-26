@@ -23,7 +23,7 @@ export default function Home() {
     setUser(null);
   }
   return (
-    <div className="">
+    <div className="w-full items-center">
         
       <button onClick={handleGoogleSignIn}>Đăng nhập bằng Google</button>
       {user && <><div>Xin chào, {user.displayName}</div><button onClick={logout}>Dang xuat</button></>}
