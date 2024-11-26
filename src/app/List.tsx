@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import {db} from './firebase/firebase';
 import Detail from './detail'
-import { collection, query, orderBy, onSnapshot, addDoc, doc, getDocs } from 'firebase/firestore';
-
+import { collection, query, getDocs } from 'firebase/firestore';
+import Image from 'next/image'
 export default function List(){
 
     const [books, setBooks] = useState<Array<{ID: number,Tentruyen: string, Gioithieu: string}>>([]);
     const [selectedBook, setSelectedBook] = useState<null | { ID: number; Tentruyen: string; Gioithieu: string }>(null);
-    const [showHome, setShowHome] = useState(false);
+ 
 
     useEffect(() => {
     const danhsachtruyen = async () =>{
@@ -46,7 +46,7 @@ return(
     <li className="pb-3 sm:pb-4" key={book.ID} onClick={() => handleBookClick(book)}>
     <div className="flex items-center space-x-4 rtl:space-x-reverse">
        <div className="flex-shrink-0">
-          <img className="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-1.jpg" alt="Neil image"></img>
+          <Image className="w-8 h-8 rounded-full" src="@next/next/no-img-element" alt="Neil image"/>
        </div>
        <div className="flex-1 min-w-0">
           <p className="text-sm font-medium text-gray-900 truncate dark:text-white">

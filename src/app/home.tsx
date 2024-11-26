@@ -1,8 +1,8 @@
 
 
-import Image from "next/image";
+
 import React, { useState } from 'react';
-import { GoogleAuthProvider, signInWithPopup, signOut, User } from 'firebase/auth';
+import { GoogleAuthProvider, signInWithPopup, User } from 'firebase/auth';
 import { auth } from './firebase/firebase';
 
 export default function Home() {

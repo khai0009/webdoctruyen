@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Home from './home';
 import List from './List';
 import Image from 'next/image'
-import { BrowserRouter, Link,Route, Routes } from 'react-router-dom';
+
 
 
 export default function Page(){
