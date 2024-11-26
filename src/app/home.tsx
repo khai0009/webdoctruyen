@@ -24,7 +24,7 @@ export default function Home() {
   }
   return (
     <div className="">
-        <input ></input>
+        
       <button onClick={handleGoogleSignIn}>Đăng nhập bằng Google</button>
       {user && <><div>Xin chào, {user.displayName}</div><button onClick={logout}>Dang xuat</button></>}
     </div>
