@@ -1,21 +1,17 @@
 "use client"
 import { useEffect, useState } from 'react';
-import Home from './Login';
-import List from './List';
+import List from './List/page';
 import Image from 'next/image'
 import { collection, query, getDocs } from 'firebase/firestore';
-import {db} from "./firebase/firebase"
+import {db} from "./firebase"
 
 
 export default function Page(){
-  const [showHome, setShowHome] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [theloai,settheloai] = useState<Array<{ID: number,TenTheLoai: string}>>([]);
   const toggle = () => setIsOpen(!isOpen);
 
-  const toggleHome = () => {
-    setShowHome(!showHome);
-  };
+
 
   useEffect(() => {
     const danhsachtheloai = async () =>{
@@ -30,13 +26,8 @@ export default function Page(){
         };
         danhsachtheloai();
       }, []);
-      
-  if(showHome){
-    return (
-      <Home></Home>
-    )
-  }
-  else return (
+
+return (
     <>
       <nav className="bg-white border-gray-200 dark:bg-gray-900">
     <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -108,7 +99,7 @@ export default function Page(){
             <a href="#" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Contact</a>
           </li>
           <li>  
-                <button onClick={toggleHome}>Đăng nhập</button>
+                <a href="./Login" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Đăng nhập</a>
           </li>
         </ul>
       </div>

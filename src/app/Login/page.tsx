@@ -1,9 +1,9 @@
 
-
+"use client"
 
 import React, { useState } from 'react';
 import { GoogleAuthProvider, signInWithPopup, User } from 'firebase/auth';
-import { auth } from './firebase/firebase';
+import { auth } from '../firebase'
 
 export default function Home() {
   const [user, setUser] = useState<null | User>(null)
