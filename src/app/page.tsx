@@ -3,15 +3,20 @@ import { useState } from 'react';
 import Home from './home';
 import List from './List';
 import Image from 'next/image'
-
+import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
+import { ChevronDownIcon } from '@heroicons/react/20/solid'
 
 
 export default function Page(){
   const [showHome, setShowHome] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
+  const toggle = () => setIsOpen(!isOpen);
+  
   const toggleHome = () => {
     setShowHome(!showHome);
   };
+
   if(showHome){
     return (
       <Home></Home>
@@ -34,7 +39,52 @@ export default function Page(){
       <div className="hidden w-full md:block md:w-auto" id="navbar-default">
         <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
           <li>
-            <a href="#" className="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page">Home</a>
+          <div className="relative inline-block text-left">
+      <a
+        type="button"
+        className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+        id="menu-button"
+        aria-expanded="false"   
+
+        aria-haspopup="true"
+        onClick={toggle}
+      >
+        Thể loại
+      </a>
+      {isOpen && (
+        <div
+          className="origin-top-right absolute right-0 mt-2 w-56   
+ rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+          role="menu"
+          aria-orientation="vertical"
+          aria-labelledby="menu-button"   
+
+          tabIndex={-1}
+        >
+          <div className="py-1" role="none">
+            <a
+              href="#"
+              className="block   
+ px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+              role="menuitem"
+              tabIndex={-1}
+              id="menu-item-0"
+            >
+              Account settings
+            </a>
+            <a
+              href="#"
+              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+              role="menuitem"
+              tabIndex={-1}
+              id="menu-item-1"
+            >
+              Sign out
+            </a>
+          </div>
+        </div>
+      )}
+    </div>
           </li>
           <li>
             <a href="#" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">About</a>
