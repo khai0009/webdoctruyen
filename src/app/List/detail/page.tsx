@@ -1,5 +1,4 @@
 "use client"
-
 import { db } from '@/app/firebase';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { useRouter } from 'next/router';

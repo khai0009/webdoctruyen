@@ -1,4 +1,5 @@
 "use client"
+
 import Image from 'next/image'
 import getBooks from '../Data'
 import { useEffect, useState } from 'react';
