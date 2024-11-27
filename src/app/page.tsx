@@ -1,22 +1,36 @@
 "use client"
-import { useState } from 'react';
-import Home from './home';
+import { useEffect, useState } from 'react';
+import Home from './Login';
 import List from './List';
 import Image from 'next/image'
-import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
-import { ChevronDownIcon } from '@heroicons/react/20/solid'
+import { collection, query, getDocs } from 'firebase/firestore';
+import {db} from "./firebase/firebase"
 
 
 export default function Page(){
   const [showHome, setShowHome] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-
+  const [theloai,settheloai] = useState<Array<{ID: number,TenTheLoai: string}>>([]);
   const toggle = () => setIsOpen(!isOpen);
-  
+
   const toggleHome = () => {
     setShowHome(!showHome);
   };
 
+  useEffect(() => {
+    const danhsachtheloai = async () =>{
+        const q = query(collection(db, 'theloai'));
+        const querySnapshot = await getDocs(q);
+        const bookData = querySnapshot.docs.map((doc) => ({            
+            ID: doc.data().ID,
+            TenTheLoai: doc.data().TenTheLoai,
+            
+          }));
+          settheloai(bookData);
+        };
+        danhsachtheloai();
+      }, []);
+      
   if(showHome){
     return (
       <Home></Home>
@@ -62,6 +76,7 @@ export default function Page(){
           tabIndex={-1}
         >
           <div className="py-1" role="none">
+          {theloai.map((theLoai) => (
             <a
               href="#"
               className="block   
@@ -69,18 +84,12 @@ export default function Page(){
               role="menuitem"
               tabIndex={-1}
               id="menu-item-0"
+              key={theLoai.ID}
             >
-              Account settings
+              {theLoai.TenTheLoai}
+              
             </a>
-            <a
-              href="#"
-              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-              role="menuitem"
-              tabIndex={-1}
-              id="menu-item-1"
-            >
-              Sign out
-            </a>
+          ))}
           </div>
         </div>
       )}
