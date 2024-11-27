@@ -1,4 +1,4 @@
-"use client"
+'use client'
 import { useEffect, useState } from 'react';
 import List from './List/page';
 import Image from 'next/image'
