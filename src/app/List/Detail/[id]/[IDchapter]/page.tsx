@@ -11,7 +11,7 @@ type chapter = {
     Ngaycapnhat: string,
     Noidung: string;
   };
-  const chapter: React.FC  =  () => {
+  const Chapter: React.FC  =  () => {
     const { IDchapter } = useParams(); 
     const [chapter,setchapter] = useState<chapter | null>();
   
@@ -57,4 +57,4 @@ type chapter = {
     );
   };
   
-  export default chapter;
+  export default Chapter;
