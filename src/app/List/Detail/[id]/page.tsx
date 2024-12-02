@@ -95,7 +95,7 @@ const Detail: React.FC  =  () => {
           Ngày cập nhật
           </p>
           <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-          {chapter.Ngaycapnhat.toLocaleDateString()}
+          {chapter.Ngaycapnhat.toString()}
           </p>
        </div>
     </div>
