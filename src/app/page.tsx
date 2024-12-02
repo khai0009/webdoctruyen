@@ -8,7 +8,7 @@ import {db} from "./firebase"
 
 export default function Page(){
   const [isOpen, setIsOpen] = useState(false);
-  const [theloai,settheloai] = useState<Array<{ID: number,TenTheLoai: string}>>([]);
+  const [theloai,settheloai] = useState<Array<{ID: string,TenTheLoai: string}>>([]);
   const toggle = () => setIsOpen(!isOpen);
 
 
