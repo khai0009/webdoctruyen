@@ -4,28 +4,27 @@ import { collection, getDocs, orderBy, query, where } from 'firebase/firestore';
 import { useParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { Timestamp } from 'firebase/firestore'; // Import Timestamp type
 
 type Book = {
   ID: string;
   Tentruyen: string;
   Gioithieu: string;
 };
-type chapter = {
+type Chapter = {
   ID: string,
   IDchuong: string,
   Chuong: string,
-  Ngaycapnhat: any,
+  Ngaycapnhat: Timestamp, // Specify Timestamp type
 };
-const Detail: React.FC  =  () => {
+const Detail: React.FC = () => {
   const { id } = useParams(); 
   const [book, setBook] = useState<Book | null>(null);
-  const [chapter,setchapter] = useState<Array<chapter>>([]);
+  const [chapter, setChapter] = useState<Array<Chapter>>([]);
 
   useEffect(() => {
     const fetchBook = async () => {
-
       if (id) {
-       
         try {
           const q = query(collection(db, 'truyen'), where('ID', '==', id));
           const querySnapshot = await getDocs(q);
@@ -39,26 +38,24 @@ const Detail: React.FC  =  () => {
           } else {
             console.log('No such document!');
           }
-
         } catch (error) {
           console.error('Error fetching document: ', error);
         }
 
         try {
-          const q = query(collection(db, 'Chuong'), where('ID', '==', id),orderBy('Ngaycapnhat', 'asc'));
+          const q = query(collection(db, 'Chuong'), where('ID', '==', id), orderBy('Ngaycapnhat', 'asc'));
           const querySnapshot = await getDocs(q);
-          const chapterdata = querySnapshot.docs.map((doc) => ({
+          const chapterData = querySnapshot.docs.map((doc) => ({
             ID: doc.data().ID,
             Chuong: doc.data().Chuong,
             IDchuong: doc.data().IDchuong,
-            Ngaycapnhat: doc.data().Ngaycapnhat.toDate(),
+            Ngaycapnhat: doc.data().Ngaycapnhat, // Use Timestamp type directly
           }));
-          if (chapterdata.length > 0) {
-            setchapter(chapterdata);
+          if (chapterData.length > 0) {
+            setChapter(chapterData);
           } else {
             console.log('No such document!');
           }
-
         } catch (error) {
           console.error('Error fetching document: ', error);
         }
@@ -75,39 +72,32 @@ const Detail: React.FC  =  () => {
     <div>
       <h1>{book.Tentruyen}</h1>
       <p>{book.Gioithieu}</p>
-          
-<ul className="max-w-md divide-y divide-gray-200 dark:divide-gray-700">
-    
-   {chapter.map((chapter) => (
-    <li className="pt-3 pb-0 sm:pt-4" key={chapter.IDchuong}>
-      <Link className="w-auto" href={`/List/Detail/${book.ID}/${chapter.IDchuong}`}>
-      <div className="flex items-center space-x-4 rtl:space-x-reverse">
-       <div className="flex-1 min-w-0">
-          <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-          Chương {chapter.Chuong}
-          </p>
-          <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-          
-          </p>
-       </div>
-       <div className="min-w-0">
-          <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-          Ngày cập nhật
-          </p>
-          <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-          {chapter.Ngaycapnhat.toString()}
-          </p>
-       </div>
+      <ul className="max-w-md divide-y divide-gray-200 dark:divide-gray-700">
+        {chapter.map((chapter) => (
+          <li className="pt-3 pb-0 sm:pt-4" key={chapter.IDchuong}>
+            <Link className="w-auto" href={`/List/Detail/${book.ID}/${chapter.IDchuong}`}>
+              <div className="flex items-center space-x-4 rtl:space-x-reverse">
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
+                    Chương {chapter.Chuong}
+                  </p>
+                  <p className="text-sm text-gray-500 truncate dark:text-gray-400">
+                  </p>
+                </div>
+                <div className="min-w-0">
+                  <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
+                    Ngày cập nhật
+                  </p>
+                  <p className="text-sm text-gray-500 truncate dark:text-gray-400">
+                    {chapter.Ngaycapnhat.toDate().toLocaleString()} {/* Convert Timestamp to Date */}
+                  </p>
+                </div>
+              </div>
+            </Link>
+          </li>
+        ))}
+      </ul>
     </div>
-      </Link>
-    
- </li>
-   ))}
-   
-</ul>
-    </div>
-
-
   );
 };
 
