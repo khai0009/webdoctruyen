@@ -46,13 +46,13 @@ type chapter = {
     if (!chapter) {
       return <div>Loading...</div>;
     }
-  
+    
     return (
       <div>
         <h1>{chapter.Noidung}</h1>
- 
-     
- 
+
+      
+        <button>Chương sau</button><button>Chương trước</button>
       </div>
     );
   };

@@ -14,7 +14,7 @@ type chapter = {
   ID: string,
   IDchuong: string,
   Chuong: string,
-  Ngaycapnhat: string,
+  Ngaycapnhat: any,
 };
 const Detail: React.FC  =  () => {
   const { id } = useParams(); 
@@ -45,13 +45,13 @@ const Detail: React.FC  =  () => {
         }
 
         try {
-          const q = query(collection(db, 'Chuong'), where('ID', '==', id),orderBy("Ngaycapnhat"));
+          const q = query(collection(db, 'Chuong'), where('ID', '==', id),orderBy('Ngaycapnhat', 'asc'));
           const querySnapshot = await getDocs(q);
           const chapterdata = querySnapshot.docs.map((doc) => ({
             ID: doc.data().ID,
             Chuong: doc.data().Chuong,
             IDchuong: doc.data().IDchuong,
-            Ngaycapnhat: doc.data().Ngaycapnhat,
+            Ngaycapnhat: doc.data().Ngaycapnhat.toDate(),
           }));
           if (chapterdata.length > 0) {
             setchapter(chapterdata);
@@ -95,7 +95,7 @@ const Detail: React.FC  =  () => {
           Ngày cập nhật
           </p>
           <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-          {chapter.Ngaycapnhat}
+          {chapter.Ngaycapnhat.toLocaleDateString()}
           </p>
        </div>
     </div>
