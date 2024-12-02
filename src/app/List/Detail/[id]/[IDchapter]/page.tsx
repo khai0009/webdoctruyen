@@ -1,9 +1,8 @@
 "use client";
 import { db } from '@/app/firebase';
-import { collection, getDocs, orderBy, query, where } from 'firebase/firestore';
+import { collection, getDocs, query, where } from 'firebase/firestore';
 import { useParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
-import Link from 'next/link';
 
 type chapter = {
     ID: string,

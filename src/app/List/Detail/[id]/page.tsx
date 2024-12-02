@@ -45,7 +45,7 @@ const Detail: React.FC  =  () => {
         }
 
         try {
-          const q = query(collection(db, 'Chuong'), where('ID', '==', id));
+          const q = query(collection(db, 'Chuong'), where('ID', '==', id),orderBy("Ngaycapnhat"));
           const querySnapshot = await getDocs(q);
           const chapterdata = querySnapshot.docs.map((doc) => ({
             ID: doc.data().ID,
