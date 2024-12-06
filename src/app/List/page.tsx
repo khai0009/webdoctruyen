@@ -20,14 +20,15 @@ export default function List(){
          
 return(
     
-<ul className="max-w-md divide-y divide-gray-200 dark:divide-gray-700">
+<ul className=" divide-y divide-gray-200 dark:divide-gray-700 mx-auto md:w-[70%] w-[90%]">
 {
 books.map((book) => (
 
-    <li className="pb-3 sm:pb-4" key={book.ID}>
+    <li className="pb-3 sm:pb-4 mt-2" key={book.ID}>
     <Link className="flex items-center space-x-4 rtl:space-x-reverse" href={`/List/Detail/${book.ID}`}>
+    
        <div className="flex-shrink-0">
-          <Image className="w-8 h-8 rounded-full" src={book.anh} width={100} height={100} alt="image"/>
+          <img className="h-full w-20 object-cover md:h-full md:w-40" src={book.anh} alt={book.Tentruyen}/>
        </div>
        <div className="flex-1 min-w-0">
           <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
