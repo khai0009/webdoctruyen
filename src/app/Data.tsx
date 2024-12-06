@@ -9,6 +9,7 @@ const getBooks = async () => {
   const bookData = querySnapshot.docs.map((doc) => 
     ({ ID: doc.data().ID, 
       Tentruyen: doc.data().Tentruyen, 
-      Gioithieu: doc.data().Gioithieu })); 
+      Gioithieu: doc.data().Gioithieu,
+      anh: doc.data().anh })); 
   return bookData; }; 
 export default getBooks

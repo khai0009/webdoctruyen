@@ -16,6 +16,7 @@ const geistMono = localFont({
 export const metadata: Metadata = {
   title: "Đọc truyện hay",
   description: "Nơi hội tụ truyện xuất sắc",
+  
 };
 
 export default function RootLayout({
@@ -24,6 +25,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    <>
     <html lang="vn">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
@@ -32,5 +34,6 @@ export default function RootLayout({
         {children}
       </body>
     </html>
+    </>
   );
 }
