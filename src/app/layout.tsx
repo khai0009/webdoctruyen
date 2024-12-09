@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { UserProvider } from './contexts/UserContext';
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -28,13 +29,12 @@ export default function RootLayout({
     <>
     <html lang="vn">
       <head>
-      <link rel="icon" href="/favicon.ico" sizes="any" />
+      <link rel="icon" href="/vercel.svg" sizes="any" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased dark:bg-white`}
       > 
-     
-        {children}
+     <UserProvider> {children} </UserProvider>
       </body>
     </html>
     </>

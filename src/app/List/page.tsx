@@ -20,26 +20,26 @@ export default function List(){
          
 return(
     
-<ul className=" divide-y divide-gray-200 dark:divide-gray-700 mx-auto md:w-[70%] w-[90%]">
+<ul className="mx-auto md:w-[70%] w-[90%] ">
 {
 books.map((book) => (
 
-    <li className="pb-3 sm:pb-4 mt-2" key={book.ID}>
-    <Link className="flex items-center space-x-4 rtl:space-x-reverse" href={`/List/Detail/${book.ID}`}>
+    <li className=" mt-2 bg-gray-50 p-2 rounded-md w-full " key={book.ID} >
+    <Link className="flex  space-x-4 rtl:space-x-reverse" href={`/List/Detail/${book.ID}`}>
     
        <div className="flex-shrink-0">
           <Image className="h-full w-20 object-cover md:h-full md:w-40" src={book.anh} alt={book.Tentruyen} width={1080} height={1924}/>
        </div>
-       <div className="flex-1 min-w-0">
-          <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
+       <div className="flex-1 min-w-0 ">
+          <p className="text-start md:text-lg font-bold text-gray-900 truncate text-base">
           {book.Tentruyen}
           </p>
-          <p className="text-sm text-gray-500 truncate dark:text-gray-400">
+          <p className="text-sm text-gray-500  w-auto h-auto md:line-clamp-6 md:text-base line-clamp-2 ">
           {book.Gioithieu}
           </p>
        </div>
-       <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-       {book.ID}
+       <div className="inline-flex items-center text-base font-semibold text-gray-900 ">
+      
        </div>
     </Link>
    
