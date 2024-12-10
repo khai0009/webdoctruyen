@@ -8,7 +8,12 @@ const nextConfig: NextConfig = {
         hostname: 'th.bing.com',
         port: '',
         pathname: '/th?id=%22.*%22&pid=Api&mkt=en-US&',
-      },
+      },{
+        protocol: 'https',
+        hostname: 'lh3.googleusercontent.com',
+        port: '',
+        pathname: '**',
+      }
     ],
   },
   

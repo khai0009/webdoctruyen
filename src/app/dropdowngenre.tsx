@@ -1,3 +1,4 @@
+"use client"
 import { collection, getDocs, query } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "./firebase";
@@ -21,10 +22,11 @@ useEffect(() => {
       }, [])
 
       return (
-      <div className="relative inline-block text-left">
+      <div className="relative inline-block text-left  h-full">
+        <div className="flex items-center">
       <a
         type="button"
-        className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+        className=" px-3 my-auto text-white rounded  md:p-0  "
         id="menu-button"
         aria-expanded="false"   
 
@@ -34,10 +36,11 @@ useEffect(() => {
       >
         Thể loại
       </a>
+      </div>
       {isOpen && (
         <div
-          className="origin-top-right absolute right-0 w-56   
- rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+          className="origin-top-right md:absolute relative right-0 w-56   
+ rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none md:top-6"
           role="menu"
           aria-orientation="vertical"
           aria-labelledby="menu-button"   
@@ -55,6 +58,7 @@ useEffect(() => {
               tabIndex={-1}
               id="menu-item-0"
               key={theLoai.ID}
+              onMouseEnter={() => setIsOpen(true)}
             >
               {theLoai.TenTheLoai}
               
