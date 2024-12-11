@@ -64,10 +64,15 @@ const Chapter: React.FC = () => {
   }
 
   return (
-    <div>
-      <h1>{chapter.Noidung}</h1>
-      <button onClick={pre}>Chương trước</button>
-      <button onClick={next}>Chương sau</button>
+    <div className="md:w-[80%] m-auto w-[90%] mt-1">
+      <h1 className='text-black font-bold text-2xl'>{chapter.Chuong}</h1>
+      <p className='mt-2 p-1 w-full h-full rounded-sm text-black border border-black text-xl'>{chapter.Noidung}</p>
+      <div className="w-fit m-auto mt-2 space-x-2">
+         <span className="bg-red-100 text-red-800 text-xl font-medium  px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300 cursor-pointer" onClick={pre}>Chương trước</span>
+         <span className="text-black text-center w-10 text-xl">{chapter.IDchuong}</span>
+         <span className="bg-red-100 text-red-800 text-xl font-medium  px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300 cursor-pointer" onClick={next}>Chương sau</span>
+      </div>
+     
     </div>
   );
 };
