@@ -30,7 +30,7 @@ export default function RootLayout({
     <>
     <html lang="vn">
       <head>
-      <link rel="icon" href="/vercel.svg" sizes="any" />
+      <link rel="icon" href="/vercel.svg" sizes="auto" className="w-auto h-auto"/>
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased dark:bg-white`}

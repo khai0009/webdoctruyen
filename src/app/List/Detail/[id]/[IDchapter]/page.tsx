@@ -1,8 +1,9 @@
 "use client";
 import { db } from '@/app/firebase';
-import { collection, getDocs, query, where } from 'firebase/firestore';
-import { useParams } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
+import { collection, getDocs, orderBy, query, where } from 'firebase/firestore';
+import { useParams, useRouter } from 'next/navigation';
+import React, { useEffect, useRef, useState } from 'react';
+
 
 type Chapter = {
   ID: string,
@@ -13,31 +14,18 @@ type Chapter = {
 };
 
 const Chapter: React.FC = () => {
-  const params = useParams(); 
-  const [IDchapter, setIDChapter] = useState<string | undefined>(params?.IDchapter?.toLocaleString());
+  const Router = useRouter();
+  const maxlength = useRef(0);
+  const params = useParams<{id: string, IDchapter: string}>(); 
   const [chapter, setChapter] = useState<Chapter | null>(null);
-  
-  const next = () => {
-    if (IDchapter) {
-      const newID = (parseInt(IDchapter.toString()) + 1).toString();
-      setIDChapter(newID);
-      console.log(newID);
-    }
-  }
 
-  const pre = () => {
-    if (IDchapter) {
-      const newID = (parseInt(IDchapter.toString()) - 1).toString();
-      setIDChapter(newID);
-      console.log(newID);
-    }
-  }
+
 
   useEffect(() => {
     const fetchBook = async () => {
-      if (IDchapter) {
+      if (params.IDchapter) {
         try {
-          const q = query(collection(db, 'Chuong'), where('IDchuong', '==', IDchapter));
+          const q = query(collection(db, 'Chuong'),where('ID','==',params.id),orderBy('Ngaycapnhat','asc'));
           const querySnapshot = await getDocs(q);
           const chapterData = querySnapshot.docs.map((doc) => ({
             ID: doc.data().ID,
@@ -45,9 +33,11 @@ const Chapter: React.FC = () => {
             IDchuong: doc.data().IDchuong,
             Ngaycapnhat: doc.data().Ngaycapnhat,
             Noidung: doc.data().Noidung,
+            
           }));
+          maxlength.current = chapterData.length;
           if (chapterData.length > 0) {
-            setChapter(chapterData[0]);
+            setChapter(chapterData[parseInt(params.IDchapter.toString())-1]);
           } else {
             console.log('No such document!');
           }
@@ -57,7 +47,23 @@ const Chapter: React.FC = () => {
       }
     };
     fetchBook();
-  }, [IDchapter]); // Re-fetch data whenever IDchapter changes
+  }, [params.IDchapter,params.id]); // Re-fetch data whenever IDchapter changes
+
+  const next = () => {
+    if (params.IDchapter && (parseInt(params.IDchapter.toString()) < maxlength.current)) {
+      const newID = (parseInt(params.IDchapter.toString()) + 1).toString();
+      Router.push('/List/Detail/'+params.id+'/'+newID)
+      }
+  }
+  
+
+  const prev = () => {
+    if (params.IDchapter && (parseInt(params.IDchapter.toString()) > 1)) {
+      const newID = (parseInt(params.IDchapter.toString()) - 1).toString();
+      Router.push('/List/Detail/'+params.id+'/'+newID)
+      
+    }
+  }
 
   if (!chapter) {
     return <div>Loading...</div>;
@@ -68,9 +74,10 @@ const Chapter: React.FC = () => {
       <h1 className='text-black font-bold text-2xl'>{chapter.Chuong}</h1>
       <p className='mt-2 p-1 w-full max-h-dvh rounded-sm text-black border border-black text-xl overflow-x-auto'>{chapter.Noidung}</p>
       <div className="w-fit m-auto mt-2 space-x-2">
-         <span className="bg-red-100 text-red-800 md:text-xl text-sm font-medium  px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300 cursor-pointer" onClick={pre}>Chương trước</span>
-         <span className="text-black text-center w-10 text-xl">{chapter.IDchuong}</span>
-         <span className="bg-red-100 text-red-800 md:text-xl text-sm font-medium  px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300 cursor-pointer" onClick={next}>Chương sau</span>
+         <span className="bg-red-100 text-red-800 md:text-xl text-sm font-medium  px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300 cursor-pointer" onClick={prev}>Chương trước</span>
+         <span className="text-black text-center w-10 text-xl">{chapter.IDchuong}</span> 
+          <span className="bg-red-100 text-red-800 md:text-xl text-sm font-medium  px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300 cursor-pointer" onClick={next}>Chương sau</span>
+         
       </div>
      
     </div>

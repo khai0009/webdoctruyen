@@ -75,7 +75,7 @@ const Detail: React.FC = () => {
     <div className="w-[90%] md:w-[70%] m-auto mt-3">
       <div className="space-x-4 flex flex-row">
       <div className="flex-shrink-0 col-start-1">
-          <Image className="h-full w-28 object-cover md:h-full md:w-56" src={book.anh} alt={book.Tentruyen}  width={1080} height={1924}></Image>
+          <Image className="h-full w-28 object-cover md:h-full md:w-56" priority={true} src={book.anh} alt={book.Tentruyen}  width={1080} height={1924}></Image>
        </div>
        <div className="flex-1 min-w-0 ">
           <p className="text-start md:text-lg font-bold text-gray-900 truncate text-base border-b-4 border-red-400">
