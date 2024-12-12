@@ -64,13 +64,13 @@ const Chapter: React.FC = () => {
   }
 
   return (
-    <div className="md:w-[80%] m-auto w-[90%] mt-1">
+    <div className=" m-auto md:w-[70%] mt-1 w-[90%]">
       <h1 className='text-black font-bold text-2xl'>{chapter.Chuong}</h1>
-      <p className='mt-2 p-1 w-full h-full rounded-sm text-black border border-black text-xl'>{chapter.Noidung}</p>
+      <p className='mt-2 p-1 w-full max-h-dvh rounded-sm text-black border border-black text-xl overflow-x-auto'>{chapter.Noidung}</p>
       <div className="w-fit m-auto mt-2 space-x-2">
-         <span className="bg-red-100 text-red-800 text-xl font-medium  px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300 cursor-pointer" onClick={pre}>Chương trước</span>
+         <span className="bg-red-100 text-red-800 md:text-xl text-sm font-medium  px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300 cursor-pointer" onClick={pre}>Chương trước</span>
          <span className="text-black text-center w-10 text-xl">{chapter.IDchuong}</span>
-         <span className="bg-red-100 text-red-800 text-xl font-medium  px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300 cursor-pointer" onClick={next}>Chương sau</span>
+         <span className="bg-red-100 text-red-800 md:text-xl text-sm font-medium  px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300 cursor-pointer" onClick={next}>Chương sau</span>
       </div>
      
     </div>

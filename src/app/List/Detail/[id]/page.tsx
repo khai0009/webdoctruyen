@@ -72,23 +72,23 @@ const Detail: React.FC = () => {
   }
 
   return (
-    <div className="w-[80%] m-auto mt-3">
+    <div className="w-[90%] md:w-[70%] m-auto mt-3">
       <div className="space-x-4 flex flex-row">
       <div className="flex-shrink-0 col-start-1">
-          <Image className="h-full w-20 object-cover md:h-full md:w-40" src={book.anh} alt={book.Tentruyen}  width={1080} height={1924}></Image>
+          <Image className="h-full w-28 object-cover md:h-full md:w-56" src={book.anh} alt={book.Tentruyen}  width={1080} height={1924}></Image>
        </div>
        <div className="flex-1 min-w-0 ">
           <p className="text-start md:text-lg font-bold text-gray-900 truncate text-base border-b-4 border-red-400">
           {book.Tentruyen}
           </p>
-          <p className="text-sm text-gray-500  w-auto h-auto md:line-clamp-6 md:text-base line-clamp-2 ">
+          <p className="text-sm text-gray-500  w-auto h-auto md:line-clamp-6 md:text-base line-clamp-4 ">
           {book.Gioithieu}
           </p>
        </div>
        </div>
-      <ol className="max-w-md divide-y divide-gray-200 dark:divide-gray-700 " type='1'>
+      <ol className=" w-[90%] md:w-[70%] m-auto list-decimal text-black grid md:grid-cols-2 grid-cols-1 gap-6 place-content-center" >
         {chapter.map((chapter) => (
-          <li className="pt-3 pb-0 sm:pt-4" key={chapter.IDchuong}>
+          <li className="pt-3 pb-0 sm:pt-4 list " key={chapter.IDchuong}>
             <Link className="w-auto" href={`/List/Detail/${book.ID}/${chapter.IDchuong}`}>
               <div className="flex items-center space-x-4 rtl:space-x-reverse">
                 <div className="flex-1 min-w-0">

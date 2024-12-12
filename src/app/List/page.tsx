@@ -20,7 +20,7 @@ export default function List(){
          
 return(
     
-<ul className="mx-auto md:w-[70%] w-[90%] ">
+<ul className="mx-auto md:w-[70%] w-[90%]">
 {
 books.map((book) => (
 
